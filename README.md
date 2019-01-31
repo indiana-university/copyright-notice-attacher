@@ -1,7 +1,7 @@
 # Copyright Notice Attacher
-Shell script for adding BSD-3 copyright notices to source files. 
+Shell script for adding BSD 3-Clause copyright notices to source files. 
 
-Open source projects at Indiana University [must show the BSD-3 copyright notice at the top of each source file](https://indiana-university.github.io/).
+Open source projects at Indiana University [must show the BSD 3-Clause copyright notice at the top of each source file](https://indiana-university.github.io/).
 
 ## Usage
 
