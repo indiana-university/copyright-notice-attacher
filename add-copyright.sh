@@ -16,7 +16,7 @@ add_copyright()
 
 add_copyright_php()
 {
-  # This alternate function is needed for PHP, since it has opening tags 
+  # This alternate function is needed for PHP, since it has opening tags
   # and comments can't be placed before them.
   
   FILE=$1
@@ -27,6 +27,22 @@ add_copyright_php()
   then
     sed -i '' "s/$FIND/$REPLACE/g" $FILE
     cat notices/php.txt $FILE > $FILE.new && mv $FILE.new $FILE
+  fi
+}
+
+add_copyright_perl()
+{
+  # This alternate function is needed for Perl, since it has an opening
+  # shebang and comments can't be placed before them.
+
+  FILE=$1
+  FIND="#!/usr/bin/perl[ ]\{0,\}"
+  REPLACE=""
+
+  if ! grep -q SPDX-License-Identifier $FILE
+  then
+    sed -i '' "s/$FIND/$REPLACE/g" $FILE
+    cat notices/perl.txt $FILE > $FILE.new && mv $FILE.new $FILE
   fi
 }
 
@@ -75,6 +91,12 @@ done
 for i in $(find . -name '*.m')
 do
   add_copyright $i notices/matlab.txt
+done
+
+# Perl
+for i in $(find . -name '*.pl')
+do
+  add_copyright_perl $i
 done
 
 # PHP
