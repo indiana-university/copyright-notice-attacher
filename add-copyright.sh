@@ -5,6 +5,8 @@
 
 add_copyright()
 {
+  # For languages that don't have opening tags.
+  
   FILE=$1
   NOTICE=$2
 
@@ -14,19 +16,19 @@ add_copyright()
   fi
 }
 
-add_copyright_php()
+add_copyright_after_opening_tag()
 {
-  # This alternate function is needed for PHP, since it has opening tags 
-  # and comments can't be placed before them.
-  
+  # For languages that have opening tags, such as PHP and Perl.
+
   FILE=$1
-  FIND="<?php[ ]\{0,\}"
+  NOTICE=$2
+  FIND=$3
   REPLACE=""
   
   if ! grep -q SPDX-License-Identifier $FILE
   then
     sed -i '' "s/$FIND/$REPLACE/g" $FILE
-    cat notices/php.txt $FILE > $FILE.new && mv $FILE.new $FILE
+    cat $NOTICE $FILE > $FILE.new && mv $FILE.new $FILE
   fi
 }
 
@@ -77,10 +79,16 @@ do
   add_copyright $i notices/matlab.txt
 done
 
+# Perl
+for i in $(find . -name '*.pl')
+do
+  add_copyright_after_opening_tag $i notices/perl.txt "#!\/usr\/bin\/perl"
+done
+
 # PHP
 for i in $(find . -name '*.php')
 do
-  add_copyright_php $i
+  add_copyright_after_opening_tag $i notices/php.txt "<?php[ ]\{0,\}"
 done
 
 # Python, R, Ruby
