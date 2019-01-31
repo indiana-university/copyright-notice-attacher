@@ -24,6 +24,12 @@ do
   add_copyright $i notices/c-js-java-php.txt
 done
 
+# F#
+for i in $(find . -name '*.fs')
+do
+  add_copyright $i notices/fsharp.txt
+done
+
 # Haskell
 for i in $(find . -name '*.hs')
 do

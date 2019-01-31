@@ -12,6 +12,7 @@ The `add-copyright.sh` shell script looks through the current directory for sour
 - C#
 - Clojure
 - Common Lisp
+- F#
 - Haskell
 - HTML
 - Java
