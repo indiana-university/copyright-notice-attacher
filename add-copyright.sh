@@ -2,12 +2,28 @@
 
 add_copyright()
 {
-  # Source file = $1
-  # Notice path = $2
+  FILE=$1
+  NOTICE=$2
 
-  if ! grep -q SPDX-License-Identifier $1
+  if ! grep -q SPDX-License-Identifier $FILE
   then
-    cat $2 $1 > $1.new && mv $1.new $1
+    cat $NOTICE $FILE > $FILE.new && mv $FILE.new $FILE
+  fi
+}
+
+add_copyright_php()
+{
+  # This alternate function is needed for PHP, since it has opening tags 
+  # and comments can't be placed before them.
+  
+  FILE=$1
+  FIND="<?php[ ]\{0,\}"
+  REPLACE=""
+  
+  if ! grep -q SPDX-License-Identifier $FILE
+  then
+    sed -i '' "s/$FIND/$REPLACE/g" $FILE
+    cat notices/php.txt $FILE > $FILE.new && mv $FILE.new $FILE
   fi
 }
 
@@ -21,7 +37,7 @@ for i in $(find . -name '*.c' -o \
                   -name '*.ts' -o \
                   -name '*.tsx')
 do
-  add_copyright $i notices/c-js-java-php.txt
+  add_copyright $i notices/c-js-java.txt
 done
 
 # F#
@@ -56,6 +72,12 @@ done
 for i in $(find . -name '*.m')
 do
   add_copyright $i notices/matlab.txt
+done
+
+# PHP
+for i in $(find . -name '*.php')
+do
+  add_copyright_php $i
 done
 
 # Python, R, Ruby

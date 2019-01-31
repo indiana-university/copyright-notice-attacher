@@ -18,6 +18,7 @@ The `add-copyright.sh` shell script looks through the current directory and all 
 - Java
 - JavaScript
 - Matlab
+- PHP
 - Python
 - R
 - Ruby
