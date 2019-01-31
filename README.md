@@ -5,7 +5,7 @@ Open source projects at Indiana University [must show the BSD-3 copyright notice
 
 ## Usage
 
-The `add-copyright.sh` shell script looks through the current directory for source files associated with the following languages:
+The `add-copyright.sh` shell script looks through the current directory and all subdirectories for source files associated with the following languages:
 
 - C
 - C++
