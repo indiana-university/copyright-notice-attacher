@@ -82,7 +82,7 @@ done
 # Perl
 for i in $(find . -name '*.pl')
 do
-  add_copyright_after_opening_tag $i notices/perl.txt "#!/usr/bin/perl"
+  add_copyright_after_opening_tag $i notices/perl.txt "#!\/usr\/bin\/perl"
 done
 
 # PHP
